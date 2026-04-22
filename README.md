@@ -1,41 +1,43 @@
+
+## 🏗 Folder Structure
+
+```text
 my-wms-app/
 ├── src/
 │   ├── app/
+│   │   ├── core/                        # 1. CORE: Trái tim của hệ thống (Singleton)
+│   │   │   ├── interceptors/            # - Xử lý Request/Response (Gắn Token JWT, lỗi 401/500)
+│   │   │   ├── guards/                  # - Bảo vệ Route (Phân quyền Admin/User)
+│   │   │   └── services/                # - Logic Global (AuthService, SignalRService)
 │   │   │
-│   │   ├── core/                        # 1. CORE: Trái tim của hệ thống (Chỉ load 1 lần)
-│   │   │   ├── interceptors/            # - Nơi gắn Token JWT, bắt lỗi 401/500 (auth.interceptor.ts)
-│   │   │   ├── guards/                  # - Chặn truy cập nếu không có quyền Admin (role.guard.ts)
-│   │   │   └── services/                # - Chứa logic dùng chung toàn App (auth.service.ts, signalr.service.ts)
+│   │   ├── shared/                      # 2. SHARED: UI/Tiện ích dùng chung
+│   │   │   ├── components/              # - Dumb UI (Nút bấm, Bảng AG-Grid, Modal Popup)
+│   │   │   ├── directives/              # - Thao tác DOM (VD: chặn nhập chữ vào ô số lượng)
+│   │   │   └── utils/                   # - Hàm Helper (Format tiền tệ, định dạng ngày giờ)
 │   │   │
-│   │   ├── shared/                      # 2. SHARED: Đồ nghề dùng chung (Không chứa Business Logic)
-│   │   │   ├── components/              # - Nút bấm custom, Bảng AG-Grid dùng chung, Modal Popup
-│   │   │   ├── directives/              # - Directive chặn nhập chữ vào ô số lượng (numbers-only.directive.ts)
-│   │   │   └── utils/                   # - Các hàm format tiền tệ, định dạng ngày giờ (date.util.ts)
-│   │   │
-│   │   ├── features/                    # 3. FEATURES: Chia theo nghiệp vụ (Domain-Driven)
+│   │   ├── features/                    # 3. FEATURES: Phân chia theo nghiệp vụ (Domain-Driven)
 │   │   │   │
-│   │   │   ├── inventory-adjustment/    # 👉 NGHIỆP VỤ: Điều chỉnh phiếu/Tồn kho
-│   │   │   │   ├── components/          #   - Dumb components: Dùng để hiển thị (adjustment-form.component)
-│   │   │   │   ├── pages/               #   - Smart components: Gắn vào Router (adjustment-list.page)
-│   │   │   │   ├── services/            #   - Business Logic điều chỉnh (adjustment.service.ts)
-│   │   │   │   ├── models/              #   - Interface TypeScript (receipt.model.ts)
-│   │   │   │   └── adjustment.routes.ts #   - Khai báo các đường dẫn URL riêng của cụm này
+│   │   │   ├── inventory-adjustment/    # 👉 Feature: Điều chỉnh phiếu/Tồn kho
+│   │   │   │   ├── components/          #   - Dumb components (Chỉ hiển thị, VD: adjustment-form)
+│   │   │   │   ├── pages/               #   - Smart components (Gắn vào Router, gọi Service)
+│   │   │   │   ├── services/            #   - Business Logic & API calls của nghiệp vụ này
+│   │   │   │   ├── models/              #   - Interface TypeScript (DTOs)
+│   │   │   │   └── adjustment.routes.ts #   - Routing nội bộ của Feature
 │   │   │   │
-│   │   │   └── pallet-management/       # 👉 NGHIỆP VỤ: Quản lý vị trí Pallet
+│   │   │   └── pallet-management/       # 👉 Feature: Quản lý vị trí Pallet
 │   │   │       ├── components/          #   - (pallet-card, pallet-grid...)
-│   │   │       ├── pages/               #   - (pallet-dashboard.page)
+│   │   │       ├── pages/               #   - (pallet-dashboard)
 │   │   │       ├── services/            #   - (pallet-api.service)
 │   │   │       ├── models/              #   - (pallet.model.ts)
-│   │   │       └── pallet.routes.ts     #   - URL cho pallet
+│   │   │       └── pallet.routes.ts     #   - Routing nội bộ của Feature
 │   │   │
-│   │   ├── app.component.ts             # 4. ENTRY POINT: Component gốc của cả giao diện
-│   │   ├── app.component.html           #    - Thường chỉ chứa <router-outlet></router-outlet>
-│   │   ├── app.routes.ts                #    - File điều phối tổng (Lazy load các file .routes.ts ở Feature)
-│   │   └── app.config.ts                #    - File đăng ký Provider, HTTP (Giống Program.cs của .NET)
+│   │   ├── app.component.ts             # 4. ENTRY POINT: Root component chứa <router-outlet>
+│   │   ├── app.routes.ts                # - Điều phối tổng (Lazy load các file .routes.ts ở Feature)
+│   │   └── app.config.ts                # - Cấu hình Provider, HTTP Client (Tương đương Program.cs)
 │   │
-│   ├── assets/                          # 5. TĨNH: Logo, Hình ảnh, i18n (Giống thư mục wwwroot)
-│   └── environments/                    # 6. MÔI TRƯỜNG: Lưu URL API (environment.ts, environment.prod.ts)
+│   ├── assets/                          # 5. ASSETS: Logo, Hình ảnh, i18n (Tương đương wwwroot)
+│   └── environments/                    # 6. ENV: Cấu hình biến môi trường (Dev/Staging/Prod)
 │
-├── angular.json                         # Cấu hình bộ build của Angular (Giống file .csproj)
-├── package.json                         # Nơi khai báo các thư viện (Giống file NuGet)
-└── tsconfig.json                        # Cấu hình biên dịch TypeScript (Gốc rễ của app)
+├── angular.json                         # Cấu hình bộ build Angular CLI
+├── package.json                         # Quản lý thư viện NPM
+└── tsconfig.json                        # Cấu hình biên dịch TypeScript
