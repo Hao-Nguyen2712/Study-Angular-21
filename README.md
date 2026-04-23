@@ -17,14 +17,14 @@ my-wms-app/
 │   │   │
 │   │   ├── features/                    # 3. FEATURES: Phân chia theo nghiệp vụ (Domain-Driven)
 │   │   │   │
-│   │   │   ├── inventory-adjustment/    # 👉 Feature: Điều chỉnh phiếu/Tồn kho
+│   │   │   ├── inventory-adjustment/    #  Feature: Điều chỉnh phiếu/Tồn kho
 │   │   │   │   ├── components/          #   - Dumb components (Chỉ hiển thị, VD: adjustment-form)
 │   │   │   │   ├── pages/               #   - Smart components (Gắn vào Router, gọi Service)
 │   │   │   │   ├── services/            #   - Business Logic & API calls của nghiệp vụ này
 │   │   │   │   ├── models/              #   - Interface TypeScript (DTOs)
 │   │   │   │   └── adjustment.routes.ts #   - Routing nội bộ của Feature
 │   │   │   │
-│   │   │   └── pallet-management/       # 👉 Feature: Quản lý vị trí Pallet
+│   │   │   └── pallet-management/       #  Feature: Quản lý vị trí Pallet
 │   │   │       ├── components/          #   - (pallet-card, pallet-grid...)
 │   │   │       ├── pages/               #   - (pallet-dashboard)
 │   │   │       ├── services/            #   - (pallet-api.service)
