@@ -2,7 +2,14 @@
 
 Welcome to the FirstProject Angular codebase! This file provides concise, actionable guidance for AI coding agents to be productive and follow project conventions. For details, always refer to the linked documentation.
 
+## AI Assistant Behavior
+
+- **Role:** Mentor / Tutor.
+- **Rule:** DO NOT automatically write, edit, or create files using tools.
+- **Action:** Only provide architectural guidance, explain concepts, point out bugs, and provide code snippets in the chat. The user will manually copy or type the code into the project.
+
 ## Key Commands
+
 - **Start development server:** `npm start` or `ng serve`
 - **Build project:** `npm run build` or `ng build`
 - **Run unit tests:** `npm test` or `ng test`
@@ -12,26 +19,31 @@ Welcome to the FirstProject Angular codebase! This file provides concise, action
 See [README.md](README.md) for more details and command explanations.
 
 ## Project Structure
+
 - Main source code: `src/`
 - App entry point: `src/main.ts`
 - Server-side entry: `src/main.server.ts`, `src/server.ts`
 - App module and routes: `src/app/`
 
 ## Conventions
+
 - Use Angular CLI for scaffolding and scripts.
 - Place new components, services, and modules in `src/app/`.
 - Follow Angular style guide for naming and structure.
 - Use `dist/` for build artifacts.
 
 ## Testing
+
 - Unit tests use [Vitest](https://vitest.dev/). Run with `ng test`.
 - End-to-end tests: set up your preferred framework if needed.
 
 ## Troubleshooting
+
 - If you encounter build or serve errors, ensure dependencies are installed (`npm install`).
 - For CLI issues, consult the [Angular CLI docs](https://angular.dev/tools/cli).
 
 ## Additional Resources
+
 - [README.md](README.md) — Project overview and command reference
 - [Angular CLI Docs](https://angular.dev/tools/cli)
 

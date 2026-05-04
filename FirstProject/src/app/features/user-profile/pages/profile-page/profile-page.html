@@ -1,1 +1,6 @@
-<p>profile-page works!</p>
+@if(!isEditing){
+<app-profile-view [profile]="userProfile" (editClick)="onEditClicked()"></app-profile-view>
+} @else {
+<app-profile-edit-form [profile]="userProfile" (cancel)="onCancelEdit()" (save)="onSaveProfile($event)">
+</app-profile-edit-form>
+}
