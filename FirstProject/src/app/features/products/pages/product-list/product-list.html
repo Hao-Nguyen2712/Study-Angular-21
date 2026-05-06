@@ -9,7 +9,13 @@
     }
 
     <div class="flex-1 w-full rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        @defer (on timer(10ms)) {
         <ag-grid-angular style="width: 100%; height: 100%;" [theme]="theme" [rowData]="productService.products()"
             [columnDefs]="colDefs" (rowClicked)="onRowClick($event)" />
+        } @placeholder {
+        <div class="flex items-center justify-center h-full bg-gray-50 text-gray-400">
+            <i class="pi pi-spin pi-spinner text-2xl mr-2"></i> Đang tải bảng dữ liệu...
+        </div>
+        }
     </div>
 </div>
