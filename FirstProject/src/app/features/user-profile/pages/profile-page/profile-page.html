@@ -1,6 +1,5 @@
-@if(!isEditing){
-<app-profile-view [profile]="userProfile" (editClick)="onEditClicked()"></app-profile-view>
+@if(!isEditing()) {
+<app-profile-view [profile]="userProfile()" (editClick)="onEditClicked()" />
 } @else {
-<app-profile-edit-form [profile]="userProfile" (cancel)="onCancelEdit()" (save)="onSaveProfile($event)">
-</app-profile-edit-form>
+<app-profile-edit-form [profile]="userProfile()" (cancel)="onCancelEdit()" (save)="onSaveProfile($event)" />
 }
