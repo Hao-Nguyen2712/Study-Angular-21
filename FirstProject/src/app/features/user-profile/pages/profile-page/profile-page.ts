@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ProfileView } from '../../components/profile-view/profile-view';
 import { UserProfile } from '../../models/profile.model';
 import { ProfileEditForm } from '../../components/profile-edit-form/profile-edit-form';
@@ -8,24 +8,25 @@ import { ProfileEditForm } from '../../components/profile-edit-form/profile-edit
   imports: [ProfileView, ProfileEditForm],
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfilePage {
-  isEditing = false;
+  isEditing = signal(false);
 
   onEditClicked() {
-    this.isEditing = true;
+    this.isEditing.set(true);
   }
 
   onCancelEdit() {
-    this.isEditing = false;
+    this.isEditing.set(false);
   }
 
   onSaveProfile(updatedProfile: UserProfile) {
-    this.userProfile = updatedProfile;
-    this.isEditing = false;
+    this.userProfile.set(updatedProfile);
+    this.isEditing.set(false);
   }
 
-  userProfile: UserProfile = {
+  userProfile = signal<UserProfile>({
     id: '1',
     name: 'Hào Nguyễn',
     role: 'Software Engineer @ FirstProject',
@@ -38,5 +39,5 @@ export class ProfilePage {
       followers: 1200,
       rating: 4.5,
     },
-  };
+  });
 }
