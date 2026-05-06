@@ -1,0 +1,21 @@
+<div class="p-6 h-[80vh] flex flex-col gap-4">
+    <h2 class="text-2xl font-bold text-gray-800">Danh sách Sản Phẩm</h2>
+
+    @if (productService.isLoading()) {
+    <div class="flex gap-2 items-center text-blue-600">
+        <i class="pi pi-spin pi-spinner text-2xl"></i>
+        <span>Đang lấy dữ liệu từ FakeStore API</span>
+    </div>
+    }
+
+    <div class="flex-1 w-full rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        @defer (on timer(10ms)) {
+        <ag-grid-angular style="width: 100%; height: 100%;" [theme]="theme" [rowData]="productService.products()"
+            [columnDefs]="colDefs" (rowClicked)="onRowClick($event)" />
+        } @placeholder {
+        <div class="flex items-center justify-center h-full bg-gray-50 text-gray-400">
+            <i class="pi pi-spin pi-spinner text-2xl mr-2"></i> Đang tải bảng dữ liệu...
+        </div>
+        }
+    </div>
+</div>

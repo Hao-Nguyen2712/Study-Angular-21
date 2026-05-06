@@ -1,8 +1,7 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
 import { routes } from './app.routes';
 
 // PrimeNG Imports
@@ -11,17 +10,17 @@ import Aura from '@primeng/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(withFetch()),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideAnimationsAsync(),         // ← Kích hoạt Animation cho PrimeNG (Lazy load)
-    providePrimeNG({                  // ← Khởi tạo cấu hình PrimeNG
+    providePrimeNG({
       theme: {
-        preset: Aura,                 // Sử dụng giao diện Aura hiện đại
+        preset: Aura,
         options: {
-          darkModeSelector: '.dark-mode' // Tùy chọn chuyển đổi Dark mode bằng class .dark-mode
-        }
-      }
-    })
-  ]
+          darkModeSelector: '.dark-mode',
+        },
+      },
+    }),
+  ],
 };
